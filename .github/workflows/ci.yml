@@ -14,7 +14,7 @@ env:
   IMAGE_NAME: flask-app
   REGISTRY: ghcr.io
   CONTAINER_USERNAME: ${{ github.actor }}
-  CONTAINER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+  CONTAINER_PASSWORD: ${{ secrets.CONTAINER_PASSWORD }}
 
 jobs:
   build:
@@ -34,7 +34,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
 
       - name: Log in to the Container Registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login "${{ env.REGISTRY }}" -u ${{ steps.convert_username.outputs.container_username }} --password-stdin
+        run: echo "${{ secrets.CONTAINER_PASSWORD }}" | docker login "${{ env.REGISTRY }}" -u ${{ steps.convert_username.outputs.container_username }} --password-stdin
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
