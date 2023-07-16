@@ -1,11 +1,12 @@
-name: Build and Push Container Image 
+name: Build and Push Container Image
 
 on:
   push:
     branches:
       - main
     paths:
-    - ".github/workflows/ci.yml"
+      - "app/**"
+      - ".github/workflows/ci.yml"
   schedule:
     - cron: "0 19 * * 6"  # Runs every Saturday at 7 PM UTC
 
@@ -23,14 +24,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Convert container username to lowercase
+        id: convert_username
+        run: |
+          CONTAINER_USERNAME_LOWER=$(echo "${{ env.CONTAINER_USERNAME }}" | tr '[:upper:]' '[:lower:]')
+          echo "::set-output name=container_username::$CONTAINER_USERNAME_LOWER"
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
       - name: Log in to the Container Registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login "${{ env.REGISTRY }}" --username "${{ env.CONTAINER_USERNAME }}" --password-stdin
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login "${{ env.REGISTRY }}" -u ${{ steps.convert_username.outputs.container_username }} --password-stdin
 
       - name: Build and push Docker image
         run: |
           docker buildx build --platform linux/amd64 --push \
-            -t "${{ env.REGISTRY }}/${{ env.CONTAINER_USERNAME }}/${{ env.IMAGE_NAME }}:latest" \
-            -t "${{ env.REGISTRY }}/${{ env.CONTAINER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}" .
+            -t "${{ env.REGISTRY }}/${{ steps.convert_username.outputs.container_username }}/${{ env.IMAGE_NAME }}:latest" \
+            -t "${{ env.REGISTRY }}/${{ steps.convert_username.outputs.container_username }}/${{ env.IMAGE_NAME }}:${{ github.sha }}" .
