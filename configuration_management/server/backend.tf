@@ -5,6 +5,5 @@ terraform {
     region         = "us-east-1"
     dynamodb_table = "appsilon-dynamodb-lock-table"
     encrypt        = true
-    acl            = "bucket-owner-full-control"
   }
 }
