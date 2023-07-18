@@ -7,30 +7,31 @@ This repository contains solution to Part 1 of the Appsilon Infrastructure task 
 |-- README.md
 |-- app
 |   |-- Dockerfile
+|   |-- README.md
 |   |-- app.py
 |   |-- requirements.txt
 |   `-- script.sh
-|-- configuration_management
-|   |-- ansible
-|   |   |-- ansible.cfg
-|   |   |-- nice-script.sh
-|   |   `-- playbook.yml
-|   |-- remote_backend
-|   |   |-- main.tf
-|   |   |-- outputs.tf
-|   |   `-- providers.tf
-|   `-- server
-|       |-- backend.tf
-|       |-- main.tf
-|       |-- modules
-|       |   `-- network
-|       |       |-- main.tf
-|       |       |-- outputs.tf
-|       |       `-- variables.tf
-|       |-- outputs.tf
-|       |-- providers.tf
-|       `-- variables.tf
-`-- setup.sh
+`-- configuration_management
+    |-- README.md
+    |-- ansible
+    |   |-- ansible.cfg
+    |   |-- nice-script.sh
+    |   `-- playbook.yml
+    |-- remote_backend
+    |   |-- main.tf
+    |   |-- outputs.tf
+    |   `-- providers.tf
+    `-- server
+        |-- backend.tf
+        |-- main.tf
+        |-- modules
+        |   `-- network
+        |       |-- main.tf
+        |       |-- outputs.tf
+        |       `-- variables.tf
+        |-- outputs.tf
+        |-- providers.tf
+        `-- variables.tf
 
 ### Containers
 - Application (Language/Framework): **Python/Flask**
