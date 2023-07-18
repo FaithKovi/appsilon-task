@@ -34,7 +34,7 @@ to provide his password: whoami
 - Install packages:
     - Tmux
     - vim
--Install Terraform CLI
+- Install Terraform CLI
 - Navigate to the `configuration_management/server` folder
 ```
 cd configuration_management/server
