@@ -27,7 +27,7 @@ $ docker build --platform linux/amd64 -t flask-app .
 ```
 - Run the newly built docker image
 ```
-$ docker run --name app -p 5000:5000 appsilon
+$ docker run --name app -p 5000:5000 flask-app
 ```
 - Navigate to your browser and enter `localhost:5000` or `127.0.0.1:5000` to see the running container application
 
